@@ -74,7 +74,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
 
         [Route("VerifyAndCheckout")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> VerifyAndCheckout(CheckoutSum sum, String code, String bankcode)
+        public async Task<IActionResult> VerifyAndCheckout(CheckoutSum sum, String bankcode)
         {
             //---------------------- Mở ra khi  Hoàn Tất Hết
             var clientt = new HttpClient();
