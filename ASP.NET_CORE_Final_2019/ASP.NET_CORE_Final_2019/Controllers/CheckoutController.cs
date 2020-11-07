@@ -13,6 +13,7 @@ using System.Diagnostics;
 using ASP.NET_CORE_Final_2019.PayPalHelper;
 using Microsoft.Extensions.Configuration;
 using PayPal.v1.Payments;
+using ASP.NET_CORE_Final_2019.API_NganLuong;
 
 namespace ASP.NET_CORE_Final_2019.Controllers
 {
@@ -41,7 +42,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         [Route("Checkout")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Checkout(CheckoutSum sum)
+        public async Task<IActionResult> Checkout(CheckoutSum sum,string bankcode)
         {
             if (_KhachHang.GetKhachHang(sum.khachhang.Email) != null)
             {
@@ -119,6 +120,10 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                 Debug.WriteLine(summ); // debug log
                 string URL = await PayPalAPI.getRedirectURLtoPayPal(summ, "USD", itemList);
                 return Redirect(URL);
+            }
+            else if (sum.PhuongThucThanhToan == "Ví Ngân Lượng" || sum.PhuongThucThanhToan == "Thẻ VISA" || sum.PhuongThucThanhToan == "Thẻ ATM")
+            {
+               // xử lý
             }
             return null;
         }
