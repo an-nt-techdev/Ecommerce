@@ -24,7 +24,7 @@ namespace ASP.NET_CORE_Final_2019.Areas.Repository
             return res;
         }
 
-        public void AddKhachHang(Khachhang KhachHang, int? Id)
+        public void AddKhachHang(Khachhang KhachHang,int? Id)
         {
             if (GetKhachHang(KhachHang.Email) == null)
             {

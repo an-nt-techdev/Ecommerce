@@ -66,11 +66,12 @@
 								<h3 class="billing-heading mb-4">Phương thức thanh toán</h3>
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label><input type="radio" name="optradio" class="mr-2" checked required> Thanh toán khi nhận hàng</label>
+                                        <label><input type="radio" name="PhuongThucThanhToan" value="Thanh toán khi nhận hàng" class="mr-2" checked> Thanh toán khi nhận hàng</label>
                                     </div>
                                     <div class="col-md-12">
-                                        <label><input type="radio" name="optradio" class="mr-2" checked required> Paypal </label>
+                                        <label><input type="radio" name="PhuongThucThanhToan" value="PayPal" class="mr-2"> Paypal</label>
                                     </div>
+									<span asp-validation-for="PhuongThucThanhToan" class="text-danger"></span>
                                 </div>
 								<p><input type="submit" class="btn btn-primary py-3 px-4" value="Xác nhận" /></p>
 							</div>

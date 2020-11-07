@@ -29,17 +29,17 @@ namespace ASP.NET_CORE_Final_2019.PayPalHelper
                 {
                     HttpClient http = GetPaypalHttpClient();
                     PayPalAccessToken accessToken = await GetPayPalAccessTokenAsync(http);
-                    PayPalPaymentCreatedResponse createdPayment = await CreatePaypalPaymentAsync(http, accessToken, total, currency, itemList);
+                    PayPalPaymentCreatedResponse createdPayment = await CreatePaypalPaymentAsync(http, accessToken,total,currency, itemList);
                     return createdPayment.links.First(x => x.rel == "approval_url").href;
                 }).Result;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Fail to login PayPal step 1 (get redirect): " + ex.Message);
+                Debug.WriteLine("Fail to login PayPal step 1 (get redirect): " +ex.Message );
                 return null;
             }
         }
-
+        
         public async Task<PayPalPaymentExecutedResponse> executedPayment(string paymentId, string payerId)
         {
             try
@@ -48,9 +48,9 @@ namespace ASP.NET_CORE_Final_2019.PayPalHelper
                 PayPalAccessToken accessToken = await GetPayPalAccessTokenAsync(http);
                 return await ExecutePaypalPaymentAsync(http, accessToken, paymentId, payerId);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                Debug.WriteLine("Fail to login PayPal step 2 (executed): " + ex.Message);
+                Debug.WriteLine("Fail to login PayPal step 2 (executed): "+ ex.Message);
                 return null;
             }
         }
@@ -91,7 +91,7 @@ namespace ASP.NET_CORE_Final_2019.PayPalHelper
             return accessToken;
         }
 
-        private async Task<PayPalPaymentCreatedResponse> CreatePaypalPaymentAsync(HttpClient http, PayPalAccessToken accessToken, double total, string currency, ItemList itemList)
+        private async Task<PayPalPaymentCreatedResponse> CreatePaypalPaymentAsync(HttpClient http, PayPalAccessToken accessToken,double total, string currency, ItemList itemList)
         {
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "v1/payments/payment");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken.access_token);
