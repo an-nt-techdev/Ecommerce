@@ -19,30 +19,29 @@ namespace ASP.NET_CORE_Final_2019.Controllers
     public class CheckoutController : ChaController
     {
         public readonly IKhachHang _KhachHang;
-        public readonly IFDonHang _Donhang;
+        //public readonly IFDonHang _Donhang;
         public readonly IDonHang _DonhangAdmin;
         public IConfiguration _configuration { get; }
         public CheckoutController(IFSanpham _IFSanpham, IFDonHang _IFDonhang, IKhachHang _IKhachHang, IConfiguration _Iconfiguration, IDonHang _IDonhang) : base(_IFSanpham, _IFDonhang)
         {
             _KhachHang = _IKhachHang;
-            _Donhang = _IFDonhang;
+            //_Donhang = _IFDonhang;
             _configuration = _Iconfiguration;
             _DonhangAdmin = _IDonhang;
         }
 
         [Route("Checkout")]
         [HttpGet]
-        public IActionResult Checkout(Double total)
+        public IActionResult Checkout()
         {
             getSession();
-            ViewBag.total = total;
             return View();
         }
 
         [Route("Checkout")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Checkout(CheckoutSum sum, Double total)
+        public async Task<IActionResult> Checkout(CheckoutSum sum)
         {
             if (_KhachHang.GetKhachHang(sum.khachhang.Email) != null)
             {
@@ -57,7 +56,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                 try
                 {
                     var message = new MimeMessage();
-                    message.From.Add(new MailboxAddress("Thiên Ân", "ndsg1964@gmail.com"));
+                    message.From.Add(new MailboxAddress("Bá Khoa", "tbkhoa1999@gmail.com"));
                     message.To.Add(new MailboxAddress(sum.khachhang.Ten, sum.khachhang.Email));
                     message.Subject = "Thông báo cửa hàng Khoa Rau Củ: ";
                     message.Body = new TextPart("plain")
@@ -80,8 +79,8 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             } // end thanh toan khi nhan hang
             else if (sum.PhuongThucThanhToan == "PayPal")
             {
+                Double summ = 0;
                 var PayPalAPI = new PayPalAPI(_configuration);
-                //string URL = await PayPalAPI.getRedirectURLtoPayPal(20, "USD");
                 var itemList = new ItemList()
                 {
                     Items = new List<Item>()
@@ -89,25 +88,40 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                 IEnumerable<Chitietdonhang> a = _DonhangAdmin.GetChitietdonhang((int)HttpContext.Session.GetInt32("Id"));
                 foreach (var item in a)
                 {
+                    Decimal soluong = 0;
+                    string des = "";
                     Sanpham sp = _Sanpham.GetSanPham(item.IdSanPham);
+                    if (sp.IdLoaiSanPham == 4)
+                    {
+                        soluong = (Decimal)item.SoLuong;
+                        des = "unit: 1 cup";
+                    }
+                    else
+                    {
+                        soluong = (Decimal)item.SoLuong / 100;
+                        des = "Unit: 100 gam";
+                    }
                     itemList.Items.Add(new Item()
                     {
                         Name = sp.Ten,
                         Currency = "USD",
-                        Price = Math.Round(((Decimal)item.Gia / 23000), 2).ToString(),
-                        Quantity = (item.SoLuong).ToString()
+                        Price = Math.Round(((Decimal)item.Gia / 23000 / soluong), 2).ToString(),
+                        Quantity = soluong.ToString(),
+                        Description = des
                     });
-                }
-                //foreach(var item in itemList.Items)
-                //{
-                //    Debug.WriteLine(item.Name +" "+ item.Quantity);
-                //}
-                // 
-                string URL = await PayPalAPI.getRedirectURLtoPayPal(total, "USD", itemList);
 
+                }
+                foreach (var item in itemList.Items)
+                {
+                    Debug.WriteLine(item.Name + " " + item.Quantity + " " + item.Price); // debug log
+                    summ = summ + Math.Round((double.Parse(item.Price) * double.Parse(item.Quantity)), 2);
+                }
+
+                Debug.WriteLine(summ); // debug log
+                string URL = await PayPalAPI.getRedirectURLtoPayPal(summ, "USD", itemList);
                 return Redirect(URL);
             }
-            return RedirectToAction("Start", "Cha", new { area = "" });
+            return null;
         }
         [Route("Checkout/Success")]
         public async Task<IActionResult> Success([FromQuery(Name = "paymentId")] string paymentId, [FromQuery(Name = "PayerID")] string payerId)

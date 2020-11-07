@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
@@ -9,7 +10,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Diagnostics;
 using PayPal.v1.Payments;
-using System.Threading.Tasks;
 
 namespace ASP.NET_CORE_Final_2019.PayPalHelper
 {
@@ -89,11 +89,6 @@ namespace ASP.NET_CORE_Final_2019.PayPalHelper
             string content = await response.Content.ReadAsStringAsync();
             PayPalAccessToken accessToken = JsonConvert.DeserializeObject<PayPalAccessToken>(content);
             return accessToken;
-        }
-
-        internal Task<string> getRedirectURLtoPayPal(int v1, string v2)
-        {
-            throw new NotImplementedException();
         }
 
         private async Task<PayPalPaymentCreatedResponse> CreatePaypalPaymentAsync(HttpClient http, PayPalAccessToken accessToken, double total, string currency, ItemList itemList)
