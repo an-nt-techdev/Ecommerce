@@ -77,30 +77,30 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         public async Task<IActionResult> VerifyAndCheckout(CheckoutSum sum, String code, String bankcode)
         {
             //---------------------- Mở ra khi  Hoàn Tất Hết
-            var clientt = new HttpClient();
+           // var clientt = new HttpClient();
 
-           // Add authentication header
-            clientt.DefaultRequestHeaders.Add("X-Authy-API-Key", AuthyAPIKey);
+           //// Add authentication header
+           // clientt.DefaultRequestHeaders.Add("X-Authy-API-Key", AuthyAPIKey);
 
-            // https://api.authy.com/protected/json/phones/verification/check?phone_number=$USER_PHONE&country_code=$USER_COUNTRY&verification_code=$VERIFY_CODE
-            var api = "https://api.authy.com/protected/json/phones/verification/check?phone_number=" + sum.khachhang.Sdt + "&country_code=84&verification_code=" + code;
-            HttpResponseMessage response = await clientt.GetAsync(api);
+           // // https://api.authy.com/protected/json/phones/verification/check?phone_number=$USER_PHONE&country_code=$USER_COUNTRY&verification_code=$VERIFY_CODE
+           // var api = "https://api.authy.com/protected/json/phones/verification/check?phone_number=" + sum.khachhang.Sdt + "&country_code=84&verification_code=" + code;
+           // HttpResponseMessage response = await clientt.GetAsync(api);
 
-            // Get the response content.
-            HttpContent responseContent = response.Content;
+           // // Get the response content.
+           // HttpContent responseContent = response.Content;
 
-            // Get the stream of the content.
-            using (var reader = new StreamReader(await responseContent.ReadAsStreamAsync()))
-            {
-                // Write the output.
+           // // Get the stream of the content.
+           // using (var reader = new StreamReader(await responseContent.ReadAsStreamAsync()))
+           // {
+           //     // Write the output.
 
-                var resultt = await reader.ReadToEndAsync();
-                // parse json string to array
-                resultt = @"[" + resultt + "]";
+           //     var resultt = await reader.ReadToEndAsync();
+           //     // parse json string to array
+           //     resultt = @"[" + resultt + "]";
 
-                dynamic blogPosts = JArray.Parse(resultt);
+           //     dynamic blogPosts = JArray.Parse(resultt);
 
-                dynamic blogPost = blogPosts[0];
+           //     dynamic blogPost = blogPosts[0];
                 //    string isTrue = blogPost.success;
                 string isTrue = "True"; // dong lai khi hoan tat
                                     // -- End Mở ra
@@ -271,7 +271,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             {
                 return RedirectToAction("Fail");
             }
-        }
+        //}
         }
         [Route("Checkout/Success")]
         public async Task<IActionResult> Success([FromQuery(Name = "paymentId")] string paymentId, [FromQuery(Name = "PayerID")] string payerId)
