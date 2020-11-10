@@ -7,14 +7,15 @@ create table KHACHHANG
 (
 Email nvarchar(200) primary key,
 Ten nvarchar(50),
-Sdt int,
+Sdt nvarchar(50),
 DiaChi nvarchar(200)
 )
 --LoaiSanPham
 create table LOAISANPHAM
 (
 Id int Identity(1,1) primary key,
-Ten nvarchar(50)
+Ten nvarchar(50),
+metatitle nvarchar(50)
 )
 --NhaCungCap
 create table NHACUNGCAP
@@ -32,7 +33,8 @@ IdLoaiSanPham int,
 Ten nvarchar(50),
 IdNhaCungCap int,
 TrangThai nvarchar(50),
-HinhAnh nvarchar(200)
+HinhAnh nvarchar(200),
+metatitle nvarchar(50)
 )
 --Chi Tiet San Pham
 create table CHITIETSANPHAM
@@ -58,7 +60,9 @@ create table DONHANG
 Id int primary key,
 EmailKhachHang nvarchar(200),
 TrangThai int,
-Ngay DateTime
+Ngay DateTime,
+PhuongThucThanhToan nvarchar(200),
+Description nvarchar(200)
 )
 --Chi Tiet Don Hang
 create table CHITIETDONHANG

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using ASP.NET_CORE_Final_2019.Areas.Repository;
 using ASP.NET_CORE_Final_2019.Areas.Services;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -37,9 +39,16 @@ namespace ASP.NET_CORE_Final_2019
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            //services.AddDbContext<VEGEFOOD_DBContext>(option =>
+            //    option.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connection=True;"));
+            // test
             services.AddDbContext<VEGEFOOD_DBContext>(option =>
-option.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connection=True;"));
+                option.UseSqlServer(Configuration.GetConnectionString("VEGEFOOD_DBContext")));
+            //
             services.AddScoped<DbContext, VEGEFOOD_DBContext>();
+            //
+            services.AddSingleton(provider => Configuration);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddTransient<IFSanpham, SanphamRepository>();
             services.AddTransient<IFDonHang, DonhangRepository>();
@@ -72,6 +81,7 @@ option.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connectio
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSession();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute("areaRoute", "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
@@ -79,6 +89,7 @@ option.UseSqlServer("Server=.\\SQLEXPRESS;Database=VEGEFOOD_DB;Trusted_Connectio
                     name: "default",
                     template: "{controller=Cha}/{action=Start}/{id?}");
             });
+
         }
     }
 }
