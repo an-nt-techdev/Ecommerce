@@ -11,8 +11,8 @@ namespace ASP.NET_CORE_Final_2019.Controllers
 {
     public class ShopController : ChaController
     {
-        public ShopController(IFSanpham _IFSanpham, IFDonHang _IFDonhang):base(_IFSanpham, _IFDonhang)
-        {}
+        public ShopController(IFSanpham _IFSanpham, IFDonHang _IFDonhang) : base(_IFSanpham, _IFDonhang)
+        { }
 
         [Route("Shop/{Page=1}")]
         public IActionResult Index(int Page)
@@ -95,7 +95,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
 
             _Donhang.updateChiTietDonHang(_ctdh);
             //getSession();            
-            return RedirectToAction("Index", "Cart", new { area = "" } );
+            return RedirectToAction("Index", "Cart", new { area = "" });
         }
     }
 }
