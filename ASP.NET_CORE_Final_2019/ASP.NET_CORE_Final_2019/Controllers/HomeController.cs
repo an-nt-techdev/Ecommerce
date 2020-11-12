@@ -14,8 +14,8 @@ namespace ASP.NET_CORE_Final_2019.Controllers
 {
     public class HomeController : ChaController
     {
-        public HomeController(IFSanpham _IFSanpham, IFDonHang _IFDonhang):base(_IFSanpham, _IFDonhang)
-        {}
+        public HomeController(IFSanpham _IFSanpham, IFDonHang _IFDonhang) : base(_IFSanpham, _IFDonhang)
+        { }
 
         [Route("Home")]
         [HttpGet]
