@@ -5,7 +5,16 @@
     ViewData["Title"] = "SingleProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@section metasocials{
+    <meta property="og:url" content="http://khoaraucu.sommee.com/" />
+    <meta property="og:title" content="@ViewBag.SanPham.Ten - @ViewBag.Chitietsanpham.Gia VND" />
+    <meta property="og:description" content="Cửa Hàng Rau Sạch Khoa Rau Củ chuyên Cung cấp Các Loại rau củ và nước ép nguyên chất" />
+    <meta property="og:image" content="@ViewBag.SanPham.HinhAnh" />
+}
+@{
+    string currentUrl = Context.Request.Scheme + "://" + Context.Request.Host + Context.Request.Path;
+    string enc = System.Net.WebUtility.UrlEncode(currentUrl);
+}
 <div class="hero-wrap hero-bread" style="background-image: url('/images/bg_1.jpg');">
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -22,9 +31,16 @@
         <div class="row">
             <div class="col-lg-6 mb-5 ftco-animate">
                 <a href="images/product-1.jpg" class="image-popup"><img src="@ViewBag.SanPham.HinhAnh" class="img-fluid" alt="Colorlib Template"></a>
+
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                 <h3>@ViewBag.SanPham.Ten</h3>
+                <iframe src="https://www.facebook.com/plugins/share_button.php?href=@enc&layout=button&size=large&width=87&height=28&appId,width=626,height=436"
+                                width="77"
+                                height="23"
+                                style="border:solid;
+                                overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media">
+                        </iframe>
                 <div class="d-flex">
                     <div class="pricing">
                         <p>Loại:    @ViewBag.Loai.Ten </p>
@@ -133,14 +149,14 @@
                         Chitietsanpham itemDetail = ViewBag.ListChiTietSanPham.Find(item.Id);
                         <div class="col-md-6 col-lg-3 ftco-animate">
                             <div class="product">
-                                <a href="/Shop/Product/@item.Id" class="img-prod">
+                                <a href="/Shop/@ViewBag.CateTitle/@item.metatitle" class="img-prod">
                                     <img class="img-fluid" src="@item.HinhAnh" alt="Colorlib Template" style="height: 200px; width:245px;">
                                     @{ double? km = 100 - itemDetail.GiaKhuyenMai;}
                                     <span class="status">Khuyến mãi @km%</span>
                                     <div class="overlay"></div>
                                 </a>
                                 <div class="text py-3 pb-4 px-3 text-center">
-                                    <h3><a href="/Shop/Product/@item.Id">@item.Ten</a></h3>
+                                    <h3><a href="/Shop/@ViewBag.CateTitle/@item.metatitle">@item.Ten</a></h3>
                                     <div class="d-flex">
                                         <div class="pricing">
                                             @{
@@ -159,7 +175,7 @@
                                     </div>
                                     <div class="bottom-area d-flex px-3">
                                         <div class="m-auto d-flex">
-                                            <a href="/Shop/Product/@item.Id" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                            <a href="/Shop/@ViewBag.CateTitle/@item.metatitle" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                                 <span><i class="ion-ios-menu"></i></span>
                                             </a>
                                             <a href="/Cart/Update/@ViewData["Session"]/@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">

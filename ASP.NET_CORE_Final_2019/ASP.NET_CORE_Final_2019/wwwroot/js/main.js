@@ -38,18 +38,6 @@
     scrollProperty: 'scroll'
   });
 
-	$('input[name="PhuongThucThanhToan"]').off('click').on('click', function () {
-		if ($(this).val() == "Thẻ ATM") {
-			$('#bank-content').show();
-		}
-		else {
-			$('#bank-content').hide();
-		}
-	});
-	$('input[name="bankcode"]').bind('click', function () {
-		$('.cardList li').removeClass('active');
-		$(this).parent().parent('li').addClass('active');
-	});
 
 	var fullHeight = function() {
 

@@ -16,10 +16,10 @@
 </div>
 
 <section class="ftco-section">
-    <form asp-action="Checkout" asp-route-total="@ViewBag.total" class="billing-form">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-7 ftco-animate">
+	<form asp-action="VerifyAndCheckout" class="billing-form">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-xl-7 ftco-animate">
 
                     <h3 class="mb-4 billing-heading">Thông tin thanh toán</h3>
                     <div class="row align-items-end">
@@ -40,13 +40,13 @@
                         </div>
                         <div class="w-100"></div>
 
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="phone">Số điện thoại</label>
-                                <input asp-for="khachhang.Sdt" type="number" class="form-control" placeholder="ví dụ: 0907883642" required>
-                            </div>
-                        </div>
-                        <div class="w-100"></div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="phone">Số điện thoại</label>
+								<input asp-for="khachhang.Sdt" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" placeholder="ví dụ: 0907883642" required>
+							</div>
+						</div>
+						<div class="w-100"></div>
 
                         <div class="col-md-12">
                             <div class="form-group">
@@ -66,12 +66,12 @@
                                 <h3 class="billing-heading mb-4">Phương thức thanh toán</h3>
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label><input type="radio" name="PhuongThucThanhToan" value="Thanh toán khi nhận hàng" class="mr-2" checked> Thanh toán khi nhận hàng</label>
+                                        <label><input type="radio" name="PhuongThucThanhToan" value="Thanh Toán Khi Nhận Hàng" class="mr-2" checked> Thanh toán khi nhận hàng</label>
                                     </div>
                                     <div class="col-md-12">
                                         <label><input type="radio" name="PhuongThucThanhToan" value="PayPal" class="mr-2"> Paypal</label>
                                     </div>
-                                    <span asp-validation-for="PhuongThucThanhToan" class="text-danger"></span>
+									<span asp-validation-for="PhuongThucThanhToan" class="text-danger"></span>
                                 </div>
                                 <p><input type="submit" class="btn btn-primary py-3 px-4" value="Xác nhận" /></p>
                             </div>
