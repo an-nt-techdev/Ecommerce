@@ -2,12 +2,16 @@
 @*@model ASP.NET_CORE_Final_2019.Models.Chitietsanpham*@
 
 @{ ViewData["Title"] = "SingleProduct";
-                Layout = "~/Views/Shared/_Layout.cshtml"; }
+                Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+@{ 
+    string url = "http://khoaraucu.somee.com" + ViewBag.SanPham.HinhAnh;
+}
 @section metasocials{
     <meta property="og:url" content="http://khoaraucu.sommee.com/" />
     <meta property="og:title" content="@ViewBag.SanPham.Ten - @ViewBag.Chitietsanpham.Gia VND" />
     <meta property="og:description" content="Cửa Hàng Rau Sạch Khoa Rau Củ chuyên Cung cấp Các Loại rau củ và nước ép nguyên chất" />
-    <meta property="og:image" content="@ViewBag.SanPham.HinhAnh" />
+    <meta property="og:image" content=@url />
     <link rel="canonical" href="http://khoaraucu.sommee.com/@ViewBag.CateTitle/@ViewBag.MetaTitle" />
 }
 @{ string currentUrl = Context.Request.Scheme + "://" + Context.Request.Host + Context.Request.Path;
