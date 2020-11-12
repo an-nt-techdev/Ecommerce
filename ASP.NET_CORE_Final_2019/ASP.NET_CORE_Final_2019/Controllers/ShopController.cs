@@ -58,12 +58,13 @@ namespace ASP.NET_CORE_Final_2019.Controllers
 
         [Route("Shop/{catetitle}/{metatitle}")]
         [HttpGet]
-        public IActionResult SingleProduct(string metatitle,string catetitle)
+        public IActionResult SingleProduct(string metatitle)
         {
             getSession();
             Sanpham tmp = _Sanpham.GetSanPhamByMetaTitle(metatitle);
             Loaisanpham a = _Sanpham.GetLoaiSanPham((int)tmp.IdLoaiSanPham);
             ViewBag.CateTitle = a.metatitle;
+            ViewBag.MetaTitle = metatitle;
             var Id = tmp.Id;
             ViewBag.SanPham = _Sanpham.GetSanPham(Id);
             ViewBag.ChiTietSanPham = _Sanpham.GetChiTietSanPham(Id);
