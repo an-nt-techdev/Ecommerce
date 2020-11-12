@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ASP.NET_CORE_Final_2019.Areas.Repository
 {
-    public class LoaiSanPhamRepository : ILoaiSanPham
+    public class LoaiSanPhamRepository:ILoaiSanPham
     {
         private VEGEFOOD_DBContext db;
 

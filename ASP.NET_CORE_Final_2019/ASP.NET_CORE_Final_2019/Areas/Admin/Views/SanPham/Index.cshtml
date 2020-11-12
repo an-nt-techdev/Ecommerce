@@ -52,21 +52,21 @@
                                             <td><img src="@item.HinhAnh" style="width:auto;height:20%"></td>
                                             <td></td>
                                             <td>
-                                                <button class="btn btn-warning"><a asp-action="Edit" asp-route-Id="@item.Id">Sửa</a></button>
+                                                <button class="btn btn-warning" ><a asp-action="Edit" asp-route-Id="@item.Id">Sửa</a></button>
                                                 <button class="btn btn-light"><a asp-action="Detail" asp-route-Id="@item.Id">Chi Tiết</a></button>
                                                 <button class="btn btn-danger"><a asp-action="Delete" asp-route-Id="@item.Id">Xóa</a></button>
                                             </td>
                                         </tr>
                                     }
-                                    <tr>
-                                        <td>
-                                            <button>
-                                                <a asp-action="Create">
-                                                    Thêm Sản Phẩm Mới
-                                                </a>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>
+                                                <button>
+                                                    <a asp-action="Create">
+                                                        Thêm Sản Phẩm Mới
+                                                    </a>
+                                                </button>
+                                            </td>
+                                        </tr>
                                 </tbody>
                             </table>
                         </div>

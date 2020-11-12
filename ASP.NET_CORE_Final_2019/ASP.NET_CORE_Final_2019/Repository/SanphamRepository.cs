@@ -17,7 +17,7 @@ namespace ASP.NET_CORE_Final_2019.Repository
         }
 
 
-        // Loại sản phẩm
+            // Loại sản phẩm
         public Loaisanpham GetLoaiSanPham(int Id)
         {
             Sanpham a = GetSanPham(Id);
@@ -25,7 +25,7 @@ namespace ASP.NET_CORE_Final_2019.Repository
             return res;
         }
         public IEnumerable<Loaisanpham> GetLoaiSanPhams => db.Loaisanpham;
-        // Thêm - sửa - xóa
+            // Thêm - sửa - xóa
         public void addLoaiSanPham(Loaisanpham _Loaisanpham)
         {
             db.Loaisanpham.Add(_Loaisanpham);
@@ -44,7 +44,7 @@ namespace ASP.NET_CORE_Final_2019.Repository
         }
 
 
-        // Sản phẩm
+            // Sản phẩm
         public Sanpham GetSanPham(int? Id)
         {
             Sanpham res = db.Sanpham.Find(Id);
@@ -65,7 +65,7 @@ namespace ASP.NET_CORE_Final_2019.Repository
             int cnt = list.Count();
             foreach (Sanpham item in list)
             {
-                if (item.Id >= cnt - 3) yield return item;
+                if (item.Id >= cnt-3) yield return item;
             }
         }
         public IEnumerable<Sanpham> GetSanPhamBanChayNhat()
@@ -73,7 +73,7 @@ namespace ASP.NET_CORE_Final_2019.Repository
             IEnumerable<Sanpham> list = GetSanPhams;
             int? Max1 = 1000000000;
             int? Max2 = 0;
-            for (int i = 1; i <= 4; i++)
+            for (int i=1; i<=4; i++)
             {
                 Sanpham sp = new Sanpham();
                 foreach (Sanpham item in list)
@@ -109,7 +109,7 @@ namespace ASP.NET_CORE_Final_2019.Repository
             {
                 i++;
                 if (i == 1) yield return item;
-                else if (i == list.Count() - 1) yield return item;
+                else if (i == list.Count()-1) yield return item;
                 else
                 {
                     if (i == num) yield return item;
@@ -120,9 +120,9 @@ namespace ASP.NET_CORE_Final_2019.Repository
                     else if (i == num * 6) yield return item;
                 }
             }
-
+            
         }
-        // Thêm - sửa - xóa
+            // Thêm - sửa - xóa
         public void addSanPham(Sanpham _Sanpham)
         {
             db.Sanpham.Add(_Sanpham);
@@ -141,7 +141,7 @@ namespace ASP.NET_CORE_Final_2019.Repository
         }
 
 
-        // Chi tiết sản phẩm
+            // Chi tiết sản phẩm
         public Chitietsanpham GetChiTietSanPham(int? Id)
         {
             Chitietsanpham res = db.Chitietsanpham.Find(Id);
@@ -149,7 +149,7 @@ namespace ASP.NET_CORE_Final_2019.Repository
         }
         public IEnumerable<Chitietsanpham> GetChiTietSanPhams => db.Chitietsanpham;
 
-        // Thêm - sửa - xóa
+            // Thêm - sửa - xóa
         public void addChiTietSanPham(Chitietsanpham _Chitietsanpham)
         {
             db.Chitietsanpham.Add(_Chitietsanpham);

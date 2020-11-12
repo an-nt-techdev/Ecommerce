@@ -16,7 +16,7 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
     {
         public readonly IKhachHang IKhachHang;
         public readonly IDonHang IDonHang;
-        public KhachHangController(IKhachHang _IKhachHang, IDonHang _IDonHang)
+        public KhachHangController(IKhachHang _IKhachHang,IDonHang _IDonHang)
         {
             IKhachHang = _IKhachHang;
             IDonHang = _IDonHang;
@@ -43,7 +43,7 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
         {
             var builder = new StringBuilder();
             IEnumerable<Khachhang> listemail = IKhachHang.GetKhachhangs;
-            foreach (var item in listemail)
+            foreach(var item in listemail)
             {
                 builder.AppendLine($"{item.Email}");
             }
@@ -58,10 +58,10 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
                 var row = 1;
                 foreach (var item in listemail)
                 {
-                    worksheet.Cell(row, 1).Value = item.Email;
+                    worksheet.Cell(row,1).Value = item.Email;
                     row++;
                 }
-                using (var stream = new MemoryStream())
+                using( var stream = new MemoryStream())
                 {
                     workbook.SaveAs(stream);
                     var content = stream.ToArray();

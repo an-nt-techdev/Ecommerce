@@ -22,7 +22,7 @@ namespace ASP.NET_CORE_Final_2019.Services
         Sanpham GetSanPhamByMetaTitle(string metatitle);
         Chitietsanpham GetChiTietSanPham(int? Id);
         Loaisanpham GetLoaiSanPham(int Id);
-
+        
         // Add One
         void addSanPham(Sanpham _Sanpham);
         void addLoaiSanPham(Loaisanpham _Loaisanpham);

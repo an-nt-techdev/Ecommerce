@@ -1,4 +1,4 @@
-create database VEGEFOOD_DB
+﻿create database VEGEFOOD_DB
 go
 use VEGEFOOD_DB
 go
@@ -7,7 +7,7 @@ create table KHACHHANG
 (
 Email nvarchar(200) primary key,
 Ten nvarchar(50),
-Sdt nvarchar(50),
+Sdt varchar(50),
 DiaChi nvarchar(200)
 )
 --LoaiSanPham
