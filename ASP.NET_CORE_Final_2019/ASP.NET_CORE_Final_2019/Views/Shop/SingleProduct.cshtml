@@ -31,9 +31,9 @@
 
 <section class="ftco-section">
     <div class="container">
-        <div class="row">
+        <div class="row" itemscope itemtype="http://schema.org/Product">
             <div class="col-lg-6 mb-5 ftco-animate">
-                <a href="images/product-1.jpg" class="image-popup"><img src="@ViewBag.SanPham.HinhAnh" class="img-fluid" alt="Colorlib Template"></a>
+                <a href="images/product-1.jpg" class="image-popup"><img itemprop="logo" src="@ViewBag.SanPham.HinhAnh" class="img-fluid" alt="Colorlib Template"></a>
 
             </div>
             <div class="col-lg-6 product-details pl-md-5 ftco-animate">
@@ -46,7 +46,7 @@
                 </iframe>
                 <div class="d-flex">
                     <div class="pricing">
-                        <p>Loại:    @ViewBag.Loai.Ten </p>
+                        <p itemprop="name">Loại:    @ViewBag.Loai.Ten </p>
                     </div>
                 </div>
                 @if (ViewBag.Chitietsanpham.GiaKhuyenMai == 100)
@@ -56,7 +56,7 @@
                 {
                     double? gkm = ViewBag.ChiTietSanPham.Gia * ViewBag.Chitietsanpham.GiaKhuyenMai / 100;
                 <p class="price">Giá <span> @ViewBag.Chitietsanpham.Gia VNĐ</span>  Khuyến Mãi Còn: <span> @gkm VND</span></p>}
-                <p>
+                <p itemprop="description">
                     Sản Phẩm Đạt Chuẩn Chất Lượng. Được Công Nhận Bởi Hội Sao Vàng Thực Phẩm Việt Nam.
                     Cửa Hàng Khoa Rau Củ cam đoan luôn mang lại rau củ sạch sẽ, tươi và các loại nước ép nguyên chất từ các loại hoa quả , rau củ xanh, tươi 100%.
                     Đồng thời chúng tôi sẽ miễng phí giao hàng cho bạn.
@@ -65,20 +65,6 @@
                     <input type="hidden" asp-for="Id" value="@ViewBag.ss" />
                     <input type="hidden" asp-for="IdSanPham" />
                     <div class="row mt-4">
-                        @*<div class="col-md-6">
-                                <div class="form-group d-flex">
-                                    <div class="select-wrap">
-                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="" id="" class="form-control">
-                                            <option value="">Small</option>
-                                            <option value="">Medium</option>
-                                            <option value="">Large</option>
-                                            <option value="">Extra Large</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>*@
-
                         <div class="w-100"></div>
                         <div class="input-group col-md-6 d-flex mb-3">
                             @if (ViewBag.Loai.Id != 4)
