@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ASP.NET_CORE_Final2019</title>
+    <title>Cửa Hàng Khoa Rau Củ</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -19,8 +19,10 @@
     <link href="~/fonts/font1.css" rel="stylesheet">
     <link href="~/fonts/font2.css" rel="stylesheet">
     <link href="~/fonts/font3.css" rel="stylesheet">
-
+    <meta name="author" content="Trần Bá Khoa" />
+    <meta name="keywords" content="rau củ, Quả, Đậu, Nước Ép, Khoa Rau Củ" />
     <link rel="stylesheet" href="~/css/open-iconic-bootstrap.min.css">
+    <meta name="description" content="Cửa Hàng Rau Củ Sạch, Nước Ép Nguyên Chất 100%, Giao Hàng Miễn Phí và trong phút chốc, Hãy Liên Hệ Với Chúng Tôi Qua SDT :0867741780, email: ohwhynotme1999@gmail.com" />
     <link rel="stylesheet" href="~/css/animate.css">
 
     <link rel="stylesheet" href="~/css/owl.carousel.min.css">
@@ -38,6 +40,18 @@
     <link rel="stylesheet" href="~/css/flaticon.css">
     <link rel="stylesheet" href="~/css/icomoon.css">
     <link rel="stylesheet" href="~/css/style.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XKC33XMXFN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-XKC33XMXFN');
+    </script>
+
+    @RenderSection("metasocials", required: false)
+
 </head>
 <body class="goto-here">
     <div class="py-1 bg-primary">
@@ -210,33 +224,44 @@
 
     @RenderSection("Scripts", required: false)
     <!-- Load Facebook SDK for JavaScript -->
-    @*<div id="fb-root"></div>
-        <script>
-            window.fbAsyncInit = function () {
-                FB.init({
-                    xfbml: true,
-                    version: 'v8.0'
-                });
-            };
+    <!--<div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v8.0'
+            });
+        };
 
-            (function (d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>*@
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>-->
 
     <!-- Your Chat Plugin code -->
-    @*<div class="fb-customerchat"
-             attribution=setup_tool
-             page_id="102451651656370"
-             theme_color="#0A7CFF"
-             logged_in_greeting="Chào Mừng đến với Cửa Hàng Khoa Rau Củ"
-             logged_out_greeting="Chào Mừng đến với Cửa Hàng Khoa Rau Củ">
-        </div>*@
+    <!--<div class="fb-customerchat"
+         attribution=setup_tool
+         page_id="102451651656370"
+         theme_color="#0A7CFF"
+         logged_in_greeting="Chào Mừng đến với Cửa Hàng Khoa Rau Củ"
+         logged_out_greeting="Chào Mừng đến với Cửa Hàng Khoa Rau Củ">
+    </div>-->
 
     <!--Start of Tawk.to Script-->
-    @*<script type="text/javascript">*@
-</body >
-</html >
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/5f97c15aaca01a1688360263/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+</html>
