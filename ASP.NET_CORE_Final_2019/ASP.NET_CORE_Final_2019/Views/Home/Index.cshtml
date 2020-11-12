@@ -103,12 +103,12 @@
                     <div class="col-md-6">
                         <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url('/images/category-1.jpg');">
                             <div class="text px-3 py-1">
-                                <h2 class="mb-0"><a href="/Shop/Cate/1">Rau Củ</a></h2>
+                                <h2 class="mb-0"><a href="/Shop/rau-cu">Rau Củ</a></h2>
                             </div>
                         </div>
                         <div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url('/images/category-2.jpg');">
                             <div class="text px-3 py-1">
-                                <h2 class="mb-0"><a href="/Shop/Cate/2">Trái Cây</a></h2>
+                                <h2 class="mb-0"><a href="/Shop/trai-cay">Trái Cây</a></h2>
                             </div>
                         </div>
                     </div>
@@ -118,12 +118,12 @@
             <div class="col-md-4">
                 <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url('/images/category-3.jpg');">
                     <div class="text px-3 py-1">
-                        <h2 class="mb-0"><a href="/Shop/Cate/4">Nước ép trái cây</a></h2>
+                        <h2 class="mb-0"><a href="/Shop/nuoc-ep">Nước ép trái cây</a></h2>
                     </div>
                 </div>
                 <div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url('/images/category-4.jpg');">
                     <div class="text px-3 py-1">
-                        <h2 class="mb-0"><a href="/Shop/Cate/3">Các Loại Đậu</a></h2>
+                        <h2 class="mb-0"><a href="/Shop/dau">Các Loại Đậu</a></h2>
                     </div>
                 </div>
             </div>
@@ -147,16 +147,17 @@
                 foreach (var item in ViewBag.List8SanPham)
                 {
                     Chitietsanpham itemDetail = ViewBag.ListChiTietSanPham.Find(item.Id);
+                    Loaisanpham cate = ViewBag.ListLoaiSanPham.Find(item.IdLoaiSanPham);
                     <div class="col-md-6 col-lg-3 ftco-animate">
                         <div class="product">
-                            <a href="/Shop/Product/@item.Id" class="img-prod">
+                            <a href="/Shop/@cate.metatitle/@item.metatitle" class="img-prod">
                                 <img class="img-fluid" src="@item.HinhAnh" alt="Colorlib Template" style="height: 200px; width:245px;">
                                 @{ double? km = 100 - itemDetail.GiaKhuyenMai;}
                                 <span class="status">Khuyến mãi @km%</span>
                                 <div class="overlay"></div>
                             </a>
                             <div class="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="/Shop/Product/@item.Id">@item.Ten</a></h3>
+                                <h3><a href="/Shop/@cate.metatitle/@item.metatitle">@item.Ten</a></h3>
                                 <div class="d-flex">
                                     <div class="pricing">
                                         @{
@@ -175,7 +176,7 @@
                                 </div>
                                 <div class="bottom-area d-flex px-3">
                                     <div class="m-auto d-flex">
-                                        <a href="/Shop/Product/@item.Id" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <a href="/Shop/@cate.metatitle/@item.metatitle" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                             <span><i class="ion-ios-menu"></i></span>
                                         </a>
                                         <a href="/Cart/Update/@ViewData["Session"]/@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
@@ -210,16 +211,17 @@
                 foreach (var item in ViewBag.ListSanPhamMoiNhat)
                 {
                     Chitietsanpham itemDetail = ViewBag.ListChiTietSanPham.Find(item.Id);
+                    Loaisanpham cate = ViewBag.ListLoaiSanPham.Find(item.IdLoaiSanPham);
                     <div class="col-md-6 col-lg-3 ftco-animate">
                         <div class="product">
-                            <a href="/Shop/Product/@item.Id" class="img-prod">
+                            <a href="/Shop/@cate.metatitle/@item.metatitle" class="img-prod">
                                 <img class="img-fluid" src="@item.HinhAnh" alt="Colorlib Template" style="height: 200px; width:245px;">
                                 @{ double? km = 100 - itemDetail.GiaKhuyenMai;}
                                 <span class="status">Khuyến mãi @km%</span>
                                 <div class="overlay"></div>
                             </a>
                             <div class="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="/Shop/Product/@item.Id">@item.Ten</a></h3>
+                                <h3><a href="/Shop/@cate.metatitle/@item.metatitle">@item.Ten</a></h3>
                                 <div class="d-flex">
                                     <div class="pricing">
                                         @{
@@ -238,7 +240,7 @@
                                 </div>
                                 <div class="bottom-area d-flex px-3">
                                     <div class="m-auto d-flex">
-                                        <a href="/Shop/Product/@item.Id" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <a href="/Shop/@cate.metatitle/@item.metatitle" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                             <span><i class="ion-ios-menu"></i></span>
                                         </a>
                                         <a href="/Cart/Update/@ViewData["Session"]/@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
@@ -273,16 +275,17 @@
                 foreach (var item in ViewBag.ListSanPhamBanChayNhat)
                 {
                     Chitietsanpham itemDetail = ViewBag.ListChiTietSanPham.Find(item.Id);
+                    Loaisanpham cate = ViewBag.ListLoaiSanPham.Find(item.IdLoaiSanPham);
                     <div class="col-md-6 col-lg-3 ftco-animate">
                         <div class="product">
-                            <a href="/Shop/Product/@item.Id" class="img-prod">
+                            <a href="/Shop/@cate.metatitle/@item.metatitle" class="img-prod">
                                 <img class="img-fluid" src="@item.HinhAnh" alt="Colorlib Template" style="height: 200px; width:245px;">
                                 @{ double? km = 100 - itemDetail.GiaKhuyenMai;}
                                 <span class="status">Khuyến mãi @km%</span>
                                 <div class="overlay"></div>
                             </a>
                             <div class="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="/Shop/Product/@item.Id">@item.Ten</a></h3>
+                                <h3><a href="/Shop/@cate.metatitle/@item.metatitle">@item.Ten</a></h3>
                                 <div class="d-flex">
                                     <div class="pricing">
                                         @{
@@ -301,7 +304,7 @@
                                 </div>
                                 <div class="bottom-area d-flex px-3">
                                     <div class="m-auto d-flex">
-                                        <a href="/Shop/Product/@item.Id" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <a href="/Shop/@cate.metatitle/@item.Id" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                             <span><i class="ion-ios-menu"></i></span>
                                         </a>
                                         <a href="/Cart/Update/@ViewData["Session"]/@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
@@ -445,7 +448,7 @@
                 <span>Điền email của bạn để nhận những thông báo và thông tin khuyến mãi mới nhất của chúng tôi thường xuyên</span>
             </div>
             <div class="col-md-6 d-flex align-items-center">
-                <form asp-action="Index" class="subscribe-form">
+                @*<form asp-action="Index" class="subscribe-form">
                     <div class="form-group d-flex">
                         <input asp-for="ChuDe" type="hidden" value="Đăng ký nhận thông báo" />
                         <input asp-for="Ten" type="hidden" value="Khách hàng" />
@@ -453,7 +456,32 @@
                         <input asp-for="Email" type="text" class="form-control" placeholder="Địa chỉ email">
                         <input type="submit" value="Đăng ký" class="submit px-3">
                     </div>
-                </form>
+                    </form>*@
+                <!-- Begin Mailchimp Signup Form -->
+                <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+                <style type="text/css">
+                    #mc_embed_signup {
+                        background: #fff;
+                        clear: left;
+                        font: 14px Helvetica,Arial,sans-serif;
+                        width: 100%;
+                    }
+                    /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+                    We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+                </style>
+                <div id="mc_embed_signup">
+                    <form action="https://somee.us2.list-manage.com/subscribe/post?u=67a8ab0db98c8f832d6d51e91&amp;id=c97747ff97" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                        <div id="mc_embed_signup_scroll">
+                            <label for="mce-EMAIL">Subscribe</label>
+                            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+                            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_67a8ab0db98c8f832d6d51e91_c97747ff97" tabindex="-1" value=""></div>
+                            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+                        </div>
+                    </form>
+                </div>
+
+                <!--End mc_embed_signup-->
             </div>
         </div>
     </div>
