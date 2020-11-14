@@ -80,29 +80,29 @@ namespace ASP.NET_CORE_Final_2019.Controllers
             var clientt = new HttpClient();
 
             // Add authentication header
-            //clientt.DefaultRequestHeaders.Add("X-Authy-API-Key", AuthyAPIKey);
+            clientt.DefaultRequestHeaders.Add("X-Authy-API-Key", AuthyAPIKey);
 
-            //// https://api.authy.com/protected/json/phones/verification/check?phone_number=$USER_PHONE&country_code=$USER_COUNTRY&verification_code=$VERIFY_CODE
-            //var api = "https://api.authy.com/protected/json/phones/verification/check?phone_number=" + sum.khachhang.Sdt + "&country_code=84&verification_code=" + code;
-            //HttpResponseMessage response = await clientt.GetAsync(api);
+            // https://api.authy.com/protected/json/phones/verification/check?phone_number=$USER_PHONE&country_code=$USER_COUNTRY&verification_code=$VERIFY_CODE
+            var api = "https://api.authy.com/protected/json/phones/verification/check?phone_number=" + sum.khachhang.Sdt + "&country_code=84&verification_code=" + code;
+            HttpResponseMessage response = await clientt.GetAsync(api);
 
-            //// Get the response content.
-            //HttpContent responseContent = response.Content;
+            // Get the response content.
+            HttpContent responseContent = response.Content;
 
-            //// Get the stream of the content.
-            //using (var reader = new StreamReader(await responseContent.ReadAsStreamAsync()))
-            //{
-            //    // Write the output.
+            // Get the stream of the content.
+            using (var reader = new StreamReader(await responseContent.ReadAsStreamAsync()))
+            {
+                // Write the output.
 
-            //    var result = await reader.ReadToEndAsync();
-            //    // parse json string to array
-            //    result = @"[" + result + "]";
+                var result = await reader.ReadToEndAsync();
+                // parse json string to array
+                result = @"[" + result + "]";
 
-            //    dynamic blogPosts = JArray.Parse(result);
+                dynamic blogPosts = JArray.Parse(result);
 
-            //    dynamic blogPost = blogPosts[0];
-            //    string isTrue = blogPost.success;
-            string isTrue = "True"; // dong lai khi hoan tat
+                dynamic blogPost = blogPosts[0];
+                string isTrue = blogPost.success;
+                //string isTrue = "True"; // dong lai khi hoan tat
                 // -- End Mở ra
                 if (isTrue == "True") // Code = Code : Success : True
                 {
@@ -250,16 +250,16 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                         info.Total_item = a.Count().ToString();
 
                         APICheckoutV3 objNLChecout = new APICheckoutV3(_configuration);
-                        ResponseInfo result = objNLChecout.GetUrlCheckout(info, payment_method);
+                        ResponseInfo resultt = objNLChecout.GetUrlCheckout(info, payment_method);
 
-                        if (result.Error_code == "00")
+                        if (resultt.Error_code == "00")
                         {
-                            return Redirect(result.Checkout_url);
+                            return Redirect(resultt.Checkout_url);
                         }
                         else
                         {
-                            Debug.WriteLine(result.Description);
-                            return RedirectToAction("Fail","Checkout", new { message = result.Description });
+                            Debug.WriteLine(resultt.Description);
+                            return RedirectToAction("Fail","Checkout", new { message = resultt.Description });
                         }
                     }
                     else
@@ -271,8 +271,10 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                 {
                     return RedirectToAction("Fail");
                 }
-            //} mở ra khi xong het
-            
+            }
+            //mở ra khi xong het
+
+
         }
 		[Route("Checkout/Success")]
         public async Task<IActionResult> Success([FromQuery(Name = "paymentId" )] string paymentId, [FromQuery(Name = "PayerID" )] string payerId )
