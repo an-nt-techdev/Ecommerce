@@ -136,32 +136,32 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                     if (sum.PhuongThucThanhToan == "Thanh Toán Khi Nhận Hàng")
                     {
 
-                        try
-                        {
-                            var message = new MimeMessage();
-                            message.From.Add(new MailboxAddress("Bá Khoa", "tbkhoa1999@gmail.com"));
-                            message.To.Add(new MailboxAddress(sum.khachhang.Ten, sum.khachhang.Email));
-                            message.Subject = "Thông báo cửa hàng Khoa Rau Củ: ";
-                            message.Body = new TextPart("plain")
-                            {
-                                Text = " Bạn đã thanh toán thành công đơn hàng có mã: " + HttpContext.Session.GetInt32("Id") + "  |  Chúng tôi sẽ tiến hành kiểm tra và giao hàng đến bạn trong thời gian ngắn nhất. Cảm ơn bạn đã tin tưởng mua hàng ở Khoa Rau Củ. LOVE!!"
-                            };
-                            using (var client = new SmtpClient())
-                            {
-                                client.Connect("smtp.gmail.com", 587, false);
-                                client.Authenticate("tbkhoa1999@gmail.com", "Iamonmyway1999@10101999");
-                                client.Send(message);
-                                client.Disconnect(true);
-                            }
+                        //try
+                        //{
+                        //    var message = new MimeMessage();
+                        //    message.From.Add(new MailboxAddress("Bá Khoa", "tbkhoa1999@gmail.com"));
+                        //    message.To.Add(new MailboxAddress(sum.khachhang.Ten, sum.khachhang.Email));
+                        //    message.Subject = "Thông báo cửa hàng Khoa Rau Củ: ";
+                        //    message.Body = new TextPart("plain")
+                        //    {
+                        //        Text = " Bạn đã thanh toán thành công đơn hàng có mã: " + HttpContext.Session.GetInt32("Id") + "  |  Chúng tôi sẽ tiến hành kiểm tra và giao hàng đến bạn trong thời gian ngắn nhất. Cảm ơn bạn đã tin tưởng mua hàng ở Khoa Rau Củ. LOVE!!"
+                        //    };
+                        //    using (var client = new SmtpClient())
+                        //    {
+                        //        client.Connect("smtp.gmail.com", 587, false);
+                        //        client.Authenticate("tbkhoa1999@gmail.com", "Iamonmyway1999@10101999");
+                        //        client.Send(message);
+                        //        client.Disconnect(true);
+                        //    }
                             return View("../Checkout/Success");
-                        }
-                        catch (Exception ex)
-                        {
-                            ModelState.Clear();
-                            ViewBag.Message = $" Oops! We have a problem here {ex.Message}";
-                            Debug.WriteLine("Oops! We have a problem here" + ex.Message);
-                            return RedirectToAction("Fail");
-                        }
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    ModelState.Clear();
+                        //    ViewBag.Message = $" Oops! We have a problem here {ex.Message}";
+                        //    Debug.WriteLine("Oops! We have a problem here" + ex.Message);
+                        //    return RedirectToAction("Fail");
+                        //}
                     } // end thanh toan khi nhan hang
                     else if (sum.PhuongThucThanhToan == "PayPal")
                     {
