@@ -41,6 +41,25 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         public IActionResult Checkout()
         {
             getSession();
+
+            var flag = false;
+            var array = _Donhang.getChiTietDonHang(HttpContext.Session.GetInt32("Id"));
+
+            // Check neu giỏ hàng Trống
+            foreach(Chitietdonhang item in _Donhang.getChiTietDonHang(HttpContext.Session.GetInt32("Id")) )
+            {
+                if (item.SoLuong != 0)
+                {
+                    flag = true;
+                    break;
+                }
+                Console.WriteLine(flag);
+            }
+            Debug.WriteLine(flag);
+            if (!flag)
+            {
+                return RedirectToAction("Index", "Cart", new { area = "" });
+            }
             return View();
         }
         [Route("CheckCode")]
@@ -269,7 +288,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                     }
                 else // Code != Code : Success : False
                 {
-                    return RedirectToAction("Fail");
+                    return RedirectToAction("Fail", "Checkout", new { message = "Sai Mã Xác Nhận!!" });
                 }
             }
             //mở ra khi xong het
