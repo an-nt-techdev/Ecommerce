@@ -52,8 +52,8 @@
                                         soluong = (Decimal)item.SoLuong / 100;
                                     }
                                     Chitietsanpham tu = ViewBag.ChiTietSanPham.Find(item.IdSanPham);
-                                    gia1donvi = (Double?)Math.Round(((Decimal)item.Gia / 23000 / soluong), 2);
-                                    total2 = total2 + (gia1donvi * (Double?)soluong);
+                                    //gia1donvi = (Double?)Math.Round(((Decimal)item.Gia / 23000 / soluong), 2);
+                                    //total2 = total2 + (gia1donvi * (Double?)soluong);
                                     <tr class="text-center">
                                         <td class="product-remove"><a asp-controller="Cart" asp-action="Remove" asp-route-Id="@item.IdSanPham"><span class="ion-ios-close"></span></a></td>
 
@@ -118,7 +118,7 @@
                     <hr>
                     <p class="d-flex total-price">
                         <span>Total</span>
-                        <span> @string.Format("{0:#,0.####}", total) VND ~ @total2 $</span>
+                        <span> @string.Format("{0:#,0.####}", total) VND</span>
                     </p>
                 </div>
                 <p><a onclick='test()' class="btn btn-primary py-3 px-4">Tiến Hành Thanh Toán</a></p>

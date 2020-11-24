@@ -12,6 +12,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
 {
     public class CartController : ChaController
     {
+
         public CartController(IFSanpham _IFSanpham, IFDonHang _IFDonhang):base(_IFSanpham, _IFDonhang)
         {}
 

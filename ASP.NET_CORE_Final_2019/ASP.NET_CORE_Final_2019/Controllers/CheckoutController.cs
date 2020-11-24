@@ -27,6 +27,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         public readonly IDonHang _DonhangAdmin;
         public IConfiguration _configuration { get; }
         public readonly string AuthyAPIKey;
+        public int USDtoVND;
         public CheckoutController(IFSanpham _IFSanpham, IFDonHang _IFDonhang, IKhachHang _IKhachHang, IConfiguration _Iconfiguration, IDonHang _IDonhang) : base(_IFSanpham, _IFDonhang)
         {
             _KhachHang = _IKhachHang;
@@ -95,7 +96,33 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> VerifyAndCheckout(CheckoutSum sum, String code, String bankcode)
         {
+
+            //convert currency
+            var currencyConvertAPI = _configuration["currencycovertApi:API"];
+            var cli = new HttpClient();
+            var fullApi = "https://free.currconv.com/api/v7/convert?q=USD_VND&compact=ultra&apiKey=" + currencyConvertAPI;
+            HttpResponseMessage getConttent = await cli.GetAsync(fullApi);
+            HttpContent respon = getConttent.Content;
+            
+            Debug.WriteLine(currencyConvertAPI + "cec");
+
+            using (var read = new StreamReader(await respon.ReadAsStreamAsync()))
+            {
+                var resss = await read.ReadToEndAsync();
+                Debug.WriteLine(resss + "cecc");
+                resss = @"[" + resss + "]";
+                dynamic ketqua = JArray.Parse(resss);
+                dynamic kq = ketqua[0];
+                string convert = kq.USD_VND;
+                ViewBag.tyso = convert;
+                USDtoVND = int.Parse(convert);
+                Debug.WriteLine(USDtoVND);
+            }
+
+            //end convert
+
             //---------------------- Mở ra khi  Hoàn Tất Hết
+
             var clientt = new HttpClient();
 
             // Add authentication header
@@ -122,8 +149,8 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                 dynamic blogPost = blogPosts[0];
                 string isTrue = blogPost.success;
                 //string isTrue = "True"; // dong lai khi hoan tat
-                // -- End Mở ra
-                if (isTrue == "True") // Code = Code : Success : True
+                                    // -- End Mở ra
+            if (isTrue == "True") // Code = Code : Success : True
                 {
                     if (_KhachHang.GetKhachHang(sum.khachhang.Email) != null)
                     {
@@ -135,33 +162,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
 
                     if (sum.PhuongThucThanhToan == "Thanh Toán Khi Nhận Hàng")
                     {
-
-                        //try
-                        //{
-                        //    var message = new MimeMessage();
-                        //    message.From.Add(new MailboxAddress("Bá Khoa", "tbkhoa1999@gmail.com"));
-                        //    message.To.Add(new MailboxAddress(sum.khachhang.Ten, sum.khachhang.Email));
-                        //    message.Subject = "Thông báo cửa hàng Khoa Rau Củ: ";
-                        //    message.Body = new TextPart("plain")
-                        //    {
-                        //        Text = " Bạn đã thanh toán thành công đơn hàng có mã: " + HttpContext.Session.GetInt32("Id") + "  |  Chúng tôi sẽ tiến hành kiểm tra và giao hàng đến bạn trong thời gian ngắn nhất. Cảm ơn bạn đã tin tưởng mua hàng ở Khoa Rau Củ. LOVE!!"
-                        //    };
-                        //    using (var client = new SmtpClient())
-                        //    {
-                        //        client.Connect("smtp.gmail.com", 587, false);
-                        //        client.Authenticate("tbkhoa1999@gmail.com", "Iamonmyway1999@10101999");
-                        //        client.Send(message);
-                        //        client.Disconnect(true);
-                        //    }
                             return View("../Checkout/Success");
-                        //}
-                        //catch (Exception ex)
-                        //{
-                        //    ModelState.Clear();
-                        //    ViewBag.Message = $" Oops! We have a problem here {ex.Message}";
-                        //    Debug.WriteLine("Oops! We have a problem here" + ex.Message);
-                        //    return RedirectToAction("Fail");
-                        //}
                     } // end thanh toan khi nhan hang
                     else if (sum.PhuongThucThanhToan == "PayPal")
                     {
@@ -191,7 +192,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                             {
                                 Name = sp.Ten,
                                 Currency = "USD",
-                                Price = Math.Round(((Decimal)item.Gia / 23000 / soluong), 2).ToString(),
+                                Price = Math.Round(((Decimal)item.Gia / USDtoVND / soluong), 2).ToString(),
                                 Quantity = soluong.ToString(),
                                 Description = des
                             });
