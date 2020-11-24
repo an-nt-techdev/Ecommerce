@@ -6,6 +6,7 @@
     double? total = 0;
     double? total2 = 0;
     double? gia1donvi = 0;
+    bool flag = false;
 }
 <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
     <div class="container">
@@ -38,6 +39,7 @@
                             {
                                 if (item.SoLuong != 0)
                                 {
+                                    flag = true;
                                     total = total + item.Gia;
                                     Sanpham ti = ViewBag.SanPham.Find(item.IdSanPham);
                                     Decimal soluong = 0;
@@ -119,7 +121,7 @@
                         <span> @string.Format("{0:#,0.####}", total) VND ~ @total2 $</span>
                     </p>
                 </div>
-                <p><a asp-controller="Checkout" asp-action="Checkout" class="btn btn-primary py-3 px-4">Tiến Hành Thanh Toán</a></p>
+                <p><a onclick='test()' class="btn btn-primary py-3 px-4">Tiến Hành Thanh Toán</a></p>
             </div>
         </div>
     </div>
@@ -148,38 +150,47 @@
 
 
 <script>
-    $(document).ready(function () {
+    function test() {
+        var c = "True";
+        if (c == '@flag') {
+            window.location.href="/Checkout"
+        }
+        else {
+            alert('Giỏ Hàng Trống');
+        }
+    }
+    //$(document).ready(function () {
 
-        var quantitiy = 0;
-        $('.quantity-right-plus').click(function (e) {
+    //    var quantitiy = 0;
+    //    $('.quantity-right-plus').click(function (e) {
 
-            // Stop acting like a button
-            e.preventDefault();
-            // Get the field name
-            var quantity = parseInt($('#quantity').val());
+    //        // Stop acting like a button
+    //        e.preventDefault();
+    //        // Get the field name
+    //        var quantity = parseInt($('#quantity').val());
 
-            // If is not undefined
+    //        // If is not undefined
 
-            $('#quantity').val(quantity + 1);
+    //        $('#quantity').val(quantity + 1);
 
 
-            // Increment
+    //        // Increment
 
-        });
+    //    });
 
-        $('.quantity-left-minus').click(function (e) {
-            // Stop acting like a button
-            e.preventDefault();
-            // Get the field name
-            var quantity = parseInt($('#quantity').val());
+    //    $('.quantity-left-minus').click(function (e) {
+    //        // Stop acting like a button
+    //        e.preventDefault();
+    //        // Get the field name
+    //        var quantity = parseInt($('#quantity').val());
 
-            // If is not undefined
+    //        // If is not undefined
 
-            // Increment
-            if (quantity > 0) {
-                $('#quantity').val(quantity - 1);
-            }
-        });
+    //        // Increment
+    //        if (quantity > 0) {
+    //            $('#quantity').val(quantity - 1);
+    //        }
+    //    });
 
-    });
+    //});
 </script>

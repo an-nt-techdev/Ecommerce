@@ -17,7 +17,7 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
         public readonly IFSanpham IFSanpham;
         public readonly INhaCungCap INhaCungCap;
         public readonly ILoaiSanPham ILoaiSanPham;
-        public SanPhamController(IFSanpham _IFSanpham, INhaCungCap _INhaCungCap, ILoaiSanPham _ILoaiSanPham)
+        public SanPhamController(IFSanpham _IFSanpham,INhaCungCap _INhaCungCap,ILoaiSanPham _ILoaiSanPham)
         {
             IFSanpham = _IFSanpham;
             INhaCungCap = _INhaCungCap;
@@ -63,7 +63,7 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
         }
         [HttpGet]
         public IActionResult Detail(int Id)
-        {
+        {   
             ViewBag.SanPham = IFSanpham.GetSanPham(Id);
             Chitietsanpham res = IFSanpham.GetChiTietSanPham(Id);
             return View(res);
@@ -108,7 +108,7 @@ namespace ASP.NET_CORE_Final_2019.Areas.Admin.Controllers
             return View(IFSanpham.GetSanPham(Id));
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost,ActionName("Delete")]
         public IActionResult DeleteConfirm(int Id)
         {
             IFSanpham.removeSanPham(Id);

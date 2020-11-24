@@ -11,8 +11,8 @@ namespace ASP.NET_CORE_Final_2019.Controllers
 {
     public class ShopController : ChaController
     {
-        public ShopController(IFSanpham _IFSanpham, IFDonHang _IFDonhang) : base(_IFSanpham, _IFDonhang)
-        { }
+        public ShopController(IFSanpham _IFSanpham, IFDonHang _IFDonhang):base(_IFSanpham, _IFDonhang)
+        {}
 
         [Route("Shop/{Page=1}")]
         [Route("Shop")]
@@ -58,12 +58,13 @@ namespace ASP.NET_CORE_Final_2019.Controllers
 
         [Route("Shop/{catetitle}/{metatitle}")]
         [HttpGet]
-        public IActionResult SingleProduct(string metatitle,string catetitle)
+        public IActionResult SingleProduct(string metatitle)
         {
             getSession();
             Sanpham tmp = _Sanpham.GetSanPhamByMetaTitle(metatitle);
             Loaisanpham a = _Sanpham.GetLoaiSanPham((int)tmp.IdLoaiSanPham);
             ViewBag.CateTitle = a.metatitle;
+            ViewBag.MetaTitle = metatitle;
             var Id = tmp.Id;
             ViewBag.SanPham = _Sanpham.GetSanPham(Id);
             ViewBag.ChiTietSanPham = _Sanpham.GetChiTietSanPham(Id);
@@ -103,7 +104,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
 
             _Donhang.updateChiTietDonHang(_ctdh);
             //getSession();            
-            return RedirectToAction("Index", "Cart", new { area = "" });
+            return RedirectToAction("Index", "Cart", new { area = "" } );
         }
     }
 }

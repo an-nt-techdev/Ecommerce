@@ -1,5 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@{ ViewData["Title"] = "Home Page"; }
+@section metasocials{
+    <meta property="og:url" content="http://khoaraucu.sommee.com/" />
+    <meta property="og:title" content="Cửa Hàng Khoa Rau Củ" />
+    <meta property="og:description" content="Cửa Hàng Rau Sạch Khoa Rau Củ chuyên Cung cấp Các Loại rau củ và nước ép nguyên chất" />
+    <link rel="canonical" href="http://khoaraucu.sommee.com/" />
 }
 @model ASP.NET_CORE_Final_2019.Models.Contact
 <section id="home-section" class="hero">
@@ -143,55 +147,48 @@
     </div>
     <div class="container">
         <div class="row">
-            @{
-                foreach (var item in ViewBag.List8SanPham)
-                {
-                    Chitietsanpham itemDetail = ViewBag.ListChiTietSanPham.Find(item.Id);
-                    Loaisanpham cate = ViewBag.ListLoaiSanPham.Find(item.IdLoaiSanPham);
-                    <div class="col-md-6 col-lg-3 ftco-animate">
-                        <div class="product">
-                            <a href="/Shop/@cate.metatitle/@item.metatitle" class="img-prod">
-                                <img class="img-fluid" src="@item.HinhAnh" alt="Colorlib Template" style="height: 200px; width:245px;">
-                                @{ double? km = 100 - itemDetail.GiaKhuyenMai;}
-                                <span class="status">Khuyến mãi @km%</span>
-                                <div class="overlay"></div>
-                            </a>
-                            <div class="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="/Shop/@cate.metatitle/@item.metatitle">@item.Ten</a></h3>
-                                <div class="d-flex">
-                                    <div class="pricing">
-                                        @{
-                                            if (itemDetail.GiaKhuyenMai == 100)
-                                            {
-                                                <p class="price">@*<span class="mr-2 price-dc"></span>*@<span class="price-sale">@itemDetail.Gia</span> VNĐ</p>
-                                            }
-                                            else
-                                            {
-                                                double? gkm = itemDetail.Gia * itemDetail.GiaKhuyenMai / 100;
-                                                <p class="price"><span class="mr-2 price-dc">@itemDetail.Gia VNĐ</span><span class="price-sale">@gkm</span> VNĐ</p>
-                                            }
-                                        }
+            @{ foreach (var item in ViewBag.List8SanPham)
+                            {
+                                Chitietsanpham itemDetail = ViewBag.ListChiTietSanPham.Find(item.Id);
+                                Loaisanpham cate = ViewBag.ListLoaiSanPham.Find(item.IdLoaiSanPham);
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <a href="/Shop/@cate.metatitle/@item.metatitle" class="img-prod">
+                            <img class="img-fluid" src="@item.HinhAnh" alt="Colorlib Template" style="height: 200px; width:245px;">
+                            @{ double? km = 100 - itemDetail.GiaKhuyenMai;}
+                            <span class="status">Khuyến mãi @km%</span>
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3><a href="/Shop/@cate.metatitle/@item.metatitle">@item.Ten</a></h3>
+                            <div class="d-flex">
+                                <div class="pricing">
+                                    @{ if (itemDetail.GiaKhuyenMai == 100)
+                                                        {
+                                        <p class="price">@*<span class="mr-2 price-dc"></span>*@<span class="price-sale">@itemDetail.Gia</span> VNĐ</p> }
+                                                        else
+                                                        {
+                                                            double? gkm = itemDetail.Gia * itemDetail.GiaKhuyenMai / 100;
+                                        <p class="price"><span class="mr-2 price-dc">@itemDetail.Gia VNĐ</span><span class="price-sale">@gkm</span> VNĐ</p> } }
 
-                                    </div>
                                 </div>
-                                <div class="bottom-area d-flex px-3">
-                                    <div class="m-auto d-flex">
-                                        <a href="/Shop/@cate.metatitle/@item.metatitle" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                            <span><i class="ion-ios-menu"></i></span>
-                                        </a>
-                                        <a href="/Cart/Update/@ViewData["Session"]/@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                            <span><i class="ion-ios-cart"></i></span>
-                                        </a>
-                                        @*<a href="" class="heart d-flex justify-content-center align-items-center ">
-                                                <span><i class="ion-ios-heart"></i></span>
-                                            </a>*@
-                                    </div>
+                            </div>
+                            <div class="bottom-area d-flex px-3">
+                                <div class="m-auto d-flex">
+                                    <a href="/Shop/@cate.metatitle/@item.metatitle" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <span><i class="ion-ios-menu"></i></span>
+                                    </a>
+                                    <a href="/Cart/Update/@ViewData["Session"]/@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        <span><i class="ion-ios-cart"></i></span>
+                                    </a>
+                                    @*<a href="" class="heart d-flex justify-content-center align-items-center ">
+                                            <span><i class="ion-ios-heart"></i></span>
+                                        </a>*@
                                 </div>
                             </div>
                         </div>
                     </div>
-                }
-            }
+                </div> } }
 
         </div>
     </div>
@@ -207,55 +204,48 @@
     </div>
     <div class="container">
         <div class="row">
-            @{
-                foreach (var item in ViewBag.ListSanPhamMoiNhat)
-                {
-                    Chitietsanpham itemDetail = ViewBag.ListChiTietSanPham.Find(item.Id);
-                    Loaisanpham cate = ViewBag.ListLoaiSanPham.Find(item.IdLoaiSanPham);
-                    <div class="col-md-6 col-lg-3 ftco-animate">
-                        <div class="product">
-                            <a href="/Shop/@cate.metatitle/@item.metatitle" class="img-prod">
-                                <img class="img-fluid" src="@item.HinhAnh" alt="Colorlib Template" style="height: 200px; width:245px;">
-                                @{ double? km = 100 - itemDetail.GiaKhuyenMai;}
-                                <span class="status">Khuyến mãi @km%</span>
-                                <div class="overlay"></div>
-                            </a>
-                            <div class="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="/Shop/@cate.metatitle/@item.metatitle">@item.Ten</a></h3>
-                                <div class="d-flex">
-                                    <div class="pricing">
-                                        @{
-                                            if (itemDetail.GiaKhuyenMai == 100)
-                                            {
-                                                <p class="price">@*<span class="mr-2 price-dc"></span>*@<span class="price-sale">@itemDetail.Gia</span> VNĐ</p>
-                                            }
-                                            else
-                                            {
-                                                double? gkm = itemDetail.Gia * itemDetail.GiaKhuyenMai / 100;
-                                                <p class="price"><span class="mr-2 price-dc">@itemDetail.Gia VNĐ</span><span class="price-sale">@gkm</span> VNĐ</p>
-                                            }
-                                        }
+            @{ foreach (var item in ViewBag.ListSanPhamMoiNhat)
+                            {
+                                Chitietsanpham itemDetail = ViewBag.ListChiTietSanPham.Find(item.Id);
+                                Loaisanpham cate = ViewBag.ListLoaiSanPham.Find(item.IdLoaiSanPham);
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <a href="/Shop/@cate.metatitle/@item.metatitle" class="img-prod">
+                            <img class="img-fluid" src="@item.HinhAnh" alt="Colorlib Template" style="height: 200px; width:245px;">
+                            @{ double? km = 100 - itemDetail.GiaKhuyenMai;}
+                            <span class="status">Khuyến mãi @km%</span>
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3><a href="/Shop/@cate.metatitle/@item.metatitle">@item.Ten</a></h3>
+                            <div class="d-flex">
+                                <div class="pricing">
+                                    @{ if (itemDetail.GiaKhuyenMai == 100)
+                                                        {
+                                        <p class="price">@*<span class="mr-2 price-dc"></span>*@<span class="price-sale">@itemDetail.Gia</span> VNĐ</p> }
+                                                        else
+                                                        {
+                                                            double? gkm = itemDetail.Gia * itemDetail.GiaKhuyenMai / 100;
+                                        <p class="price"><span class="mr-2 price-dc">@itemDetail.Gia VNĐ</span><span class="price-sale">@gkm</span> VNĐ</p> } }
 
-                                    </div>
                                 </div>
-                                <div class="bottom-area d-flex px-3">
-                                    <div class="m-auto d-flex">
-                                        <a href="/Shop/@cate.metatitle/@item.metatitle" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                            <span><i class="ion-ios-menu"></i></span>
-                                        </a>
-                                        <a href="/Cart/Update/@ViewData["Session"]/@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                            <span><i class="ion-ios-cart"></i></span>
-                                        </a>
-                                        @*<a href="" class="heart d-flex justify-content-center align-items-center ">
-                                                <span><i class="ion-ios-heart"></i></span>
-                                            </a>*@
-                                    </div>
+                            </div>
+                            <div class="bottom-area d-flex px-3">
+                                <div class="m-auto d-flex">
+                                    <a href="/Shop/@cate.metatitle/@item.metatitle" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <span><i class="ion-ios-menu"></i></span>
+                                    </a>
+                                    <a href="/Cart/Update/@ViewData["Session"]/@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        <span><i class="ion-ios-cart"></i></span>
+                                    </a>
+                                    @*<a href="" class="heart d-flex justify-content-center align-items-center ">
+                                            <span><i class="ion-ios-heart"></i></span>
+                                        </a>*@
                                 </div>
                             </div>
                         </div>
                     </div>
-                }
-            }
+                </div> } }
 
         </div>
     </div>
@@ -271,55 +261,48 @@
     </div>
     <div class="container">
         <div class="row">
-            @{
-                foreach (var item in ViewBag.ListSanPhamBanChayNhat)
-                {
-                    Chitietsanpham itemDetail = ViewBag.ListChiTietSanPham.Find(item.Id);
-                    Loaisanpham cate = ViewBag.ListLoaiSanPham.Find(item.IdLoaiSanPham);
-                    <div class="col-md-6 col-lg-3 ftco-animate">
-                        <div class="product">
-                            <a href="/Shop/@cate.metatitle/@item.metatitle" class="img-prod">
-                                <img class="img-fluid" src="@item.HinhAnh" alt="Colorlib Template" style="height: 200px; width:245px;">
-                                @{ double? km = 100 - itemDetail.GiaKhuyenMai;}
-                                <span class="status">Khuyến mãi @km%</span>
-                                <div class="overlay"></div>
-                            </a>
-                            <div class="text py-3 pb-4 px-3 text-center">
-                                <h3><a href="/Shop/@cate.metatitle/@item.metatitle">@item.Ten</a></h3>
-                                <div class="d-flex">
-                                    <div class="pricing">
-                                        @{
-                                            if (itemDetail.GiaKhuyenMai == 100)
-                                            {
-                                                <p class="price">@*<span class="mr-2 price-dc"></span>*@<span class="price-sale">@itemDetail.Gia</span> VNĐ</p>
-                                            }
-                                            else
-                                            {
-                                                double? gkm = itemDetail.Gia * itemDetail.GiaKhuyenMai / 100;
-                                                <p class="price"><span class="mr-2 price-dc">@itemDetail.Gia VNĐ</span><span class="price-sale">@gkm</span> VNĐ</p>
-                                            }
-                                        }
+            @{ foreach (var item in ViewBag.ListSanPhamBanChayNhat)
+                            {
+                                Chitietsanpham itemDetail = ViewBag.ListChiTietSanPham.Find(item.Id);
+                                Loaisanpham cate = ViewBag.ListLoaiSanPham.Find(item.IdLoaiSanPham);
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <a href="/Shop/@cate.metatitle/@item.metatitle" class="img-prod">
+                            <img class="img-fluid" src="@item.HinhAnh" alt="Colorlib Template" style="height: 200px; width:245px;">
+                            @{ double? km = 100 - itemDetail.GiaKhuyenMai;}
+                            <span class="status">Khuyến mãi @km%</span>
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3><a href="/Shop/@cate.metatitle/@item.metatitle">@item.Ten</a></h3>
+                            <div class="d-flex">
+                                <div class="pricing">
+                                    @{ if (itemDetail.GiaKhuyenMai == 100)
+                                                        {
+                                        <p class="price">@*<span class="mr-2 price-dc"></span>*@<span class="price-sale">@itemDetail.Gia</span> VNĐ</p> }
+                                                        else
+                                                        {
+                                                            double? gkm = itemDetail.Gia * itemDetail.GiaKhuyenMai / 100;
+                                        <p class="price"><span class="mr-2 price-dc">@itemDetail.Gia VNĐ</span><span class="price-sale">@gkm</span> VNĐ</p> } }
 
-                                    </div>
                                 </div>
-                                <div class="bottom-area d-flex px-3">
-                                    <div class="m-auto d-flex">
-                                        <a href="/Shop/@cate.metatitle/@item.Id" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                            <span><i class="ion-ios-menu"></i></span>
-                                        </a>
-                                        <a href="/Cart/Update/@ViewData["Session"]/@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                            <span><i class="ion-ios-cart"></i></span>
-                                        </a>
-                                        @*<a href="" class="heart d-flex justify-content-center align-items-center ">
-                                                <span><i class="ion-ios-heart"></i></span>
-                                            </a>*@
-                                    </div>
+                            </div>
+                            <div class="bottom-area d-flex px-3">
+                                <div class="m-auto d-flex">
+                                    <a href="/Shop/@cate.metatitle/@item.Id" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <span><i class="ion-ios-menu"></i></span>
+                                    </a>
+                                    <a href="/Cart/Update/@ViewData["Session"]/@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        <span><i class="ion-ios-cart"></i></span>
+                                    </a>
+                                    @*<a href="" class="heart d-flex justify-content-center align-items-center ">
+                                            <span><i class="ion-ios-heart"></i></span>
+                                        </a>*@
                                 </div>
                             </div>
                         </div>
                     </div>
-                }
-            }
+                </div> } }
 
         </div>
     </div>
