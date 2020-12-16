@@ -27,7 +27,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
         public readonly IDonHang _DonhangAdmin;
         public IConfiguration _configuration { get; }
         public readonly string AuthyAPIKey;
-        public int USDtoVND;
+        public float USDtoVND;
         public CheckoutController(IFSanpham _IFSanpham, IFDonHang _IFDonhang, IKhachHang _IKhachHang, IConfiguration _Iconfiguration, IDonHang _IDonhang) : base(_IFSanpham, _IFDonhang)
         {
             _KhachHang = _IKhachHang;
@@ -115,7 +115,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                 dynamic kq = ketqua[0];
                 string convert = kq.USD_VND;
                 ViewBag.tyso = convert;
-                USDtoVND = int.Parse(convert);
+                USDtoVND = float.Parse(convert);
                 Debug.WriteLine(USDtoVND);
             }
 
@@ -192,7 +192,7 @@ namespace ASP.NET_CORE_Final_2019.Controllers
                             {
                                 Name = sp.Ten,
                                 Currency = "USD",
-                                Price = Math.Round(((Decimal)item.Gia / USDtoVND / soluong), 2).ToString(),
+                                Price = Math.Round(((Decimal)item.Gia / (Decimal)USDtoVND / soluong), 2).ToString(),
                                 Quantity = soluong.ToString(),
                                 Description = des
                             });
